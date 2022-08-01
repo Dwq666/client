@@ -33,13 +33,16 @@ message("client LIBDIR ====>${LIBDIR}")
 # 往静态库取需要用到的文件
 set(LIBS
    nanomsg
+   ws2_32
+   mswsock
+   advapi32
 )
 # 添加文件
 target_link_libraries(client ${LIBS})
 
 add_custom_command(TARGET client 
                     POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E echo compile Finish ${PROJECT_SOURCE_DIR}/win32/bin/server.exe
+                    COMMAND ${CMAKE_COMMAND} -E echo compile Finish ${PROJECT_SOURCE_DIR}/win32/bin/client.exe
                     VERBATIM
                    ) 
 
