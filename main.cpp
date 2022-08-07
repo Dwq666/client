@@ -6,7 +6,7 @@ int main()
 {   
     WSADATA wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
-    f_client * lclient = new f_client("172.27.65.154",8888);
+    f_client * lclient = new f_client("172.31.167.68",8888);
     lclient->start();
     
 

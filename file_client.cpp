@@ -21,20 +21,18 @@ void f_client::start()
  
 	connect(sock, (sockaddr*)&addr, sizeof(addr));
 
+    char * buf = new char[1024];
     while(1)
     {
         cin>>("%s",buf);
-        SendData(&buf,sizeof(buf));
-        memset(buf, 0, 1024);
+        SendData(buf,sizeof(buf));
+        memset(buf, 0, 1024);   
     }
 	
 }
 
-int f_client::openFile(const char *path)
-{
-}
 
-int f_client::SendFile(const char * aFileName)
+void f_client::SendFile(const char * aFileName)
 {
     FILE * fp = fopen(aFileName, "rb");
     fseek(fp, 0, SEEK_END);
@@ -46,13 +44,15 @@ int f_client::SendFile(const char * aFileName)
     delete[] buffer;
 }
 
-int f_client::SendData(const char * aData ,int aSize)
+void f_client::SendData(const char * aData ,int aSize)
 {
-    send(sock,(char *)&aSize,4,0);
+    send(sock,(char *)&aSize,sizeof(aSize),0);
+
     int lIndex=0;
-    while( lIndex <aSize)
+    while(lIndex <aSize)
     {
         int  lret= send(sock,aData+ lIndex,1024,0);
         lIndex += lret;
     }
+  
 }

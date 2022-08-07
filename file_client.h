@@ -22,14 +22,13 @@ protected:
 	SOCKET sock;
     char * ip_addr; //定义ip地址
     int port_addr;// 定义端口号  
-    char buf[1024] = {0};  
     FileName fn;   
     
 public:
     f_client(char * aip,int aport);
     virtual ~f_client();
     void start();
-    int openFile(const char *path);
-    int SendFile(const char *path);
+    void SendFile(const char *path);
+    void SendData(const char * aData ,int aSize);
 
 };
